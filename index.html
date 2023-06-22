@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="google" content="notranslate">-->
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.4.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+    <title>2023년 AP설치공사(제주공공,NIA) - (주)에이스전기통신</title>
+
+    <script type="text/javascript"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=965b22ebef0dab874758c4d4379f6b33&libraries=services"></script>
+</head>
+<style>
+        table {
+      width: 100%;
+      border: 1px solid #444444;
+      border-collapse: collapse;
+      margin: 0px;
+      font-size: small;
+    }
+</style>
+<body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <nav >
+            <span class="header-nav button"><i class="bi bi-list toggle-sidebar-btn"></i></span>
+        </nav><!-- End Icons Navigation -->
+
+        <div class="d-flex align-items-center justify-content-between">
+                <span id="titleConName">2023년 AP설치공사(제주공공,NIA)</span>
+            <a href="index.html" class="logo d-flex align-items-right">
+                
+                    <span class="header-nav button"><i class="bi bi-list bx-refresh"></i></span>
+            </a>
+        </div><!-- End Logo -->
+
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <div class="card">
+                    <a class="nav-link " data-bs-target="#constatus-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-graph-up-arrow"></i><span>작업현황</span><i class="bi bi-chevron-down ms-auto"></i><br>
+
+
+                    </a>
+                    
+                    <div id="constatus-nav" class="list-group collapse " data-bs-parent="#sidebar-nav">
+                        <div class="card-body"> 
+                            <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>에이스전기통신</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
+                                    <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>제주공공[교체]</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
+                                    <button id="nontarget" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/nontarget.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
+                                    <button id="incomplete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/incomplete.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
+                                    <button id="complete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/complete.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
+                                    <button id="added" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/added.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
+                                    <button id="cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
+
+                                    <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>제주공공[신규]</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
+                                    <button id="nontarget" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/nontarget.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
+                                    <button id="incomplete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/incomplete.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
+                                    <button id="complete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/complete.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
+                                    <button id="added" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/added.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
+                                    <button id="cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
+
+                                    <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>NIA[신규]</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
+                                    <button id="nontarget" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/nontarget.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
+                                    <button id="incomplete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/incomplete.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
+                                    <button id="complete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/complete.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
+                                    <button id="added" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/added.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
+                                    <button id="cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
+
+                        </div>
+                    </div>
+                </div>
+            </li><!-- End constatus Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" >
+                    <i class="bi bi bi-card-list"></i><span>AP 리스트</span>
+                </a><hr>
+                <ul id="ul_postlist" class="nav-content"></ul>
+
+            </li><!-- End Components Nav -->
+        </ul>
+        <p align="right"><font size="1" >(UPDATE : 2023-06-21 00:00:00)</font></p>
+    </aside><!-- End Sidebar-->
+    
+    <!-- 지도를 여기에 표시 -->
+    <main id="main" class="main">
+        <!-- 지도를 표시할 div 입니다 -->
+        <div id="map" class="pagetitle"></div>
+       
+    </main><!-- End #main -->
+
+
+    </main>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        mapOption = {
+            center: new kakao.maps.LatLng(33.4985971130147, 126.509667470518), // 지도의 중심좌표, 오라로1길 36
+            level: 1 // 지도의 확대 레벨
+        };  
+
+        // 지도를 생성합니다    
+        var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+        // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+        var mapTypeControl = new kakao.maps.MapTypeControl();   
+
+        //일단 공사명 받아옴
+        const conname = document.getElementById('titleConName').innerText //value는 태그 내용까지 모두 포함해서 문자열만 받아 올 수 없음
+
+        //공사명 받아왔으면.. 작업현황도 가져와야..
+        var ConStatus = new getConStatus();
+
+        //작업현황 가져오기
+        function getConStatus() {       
+            fetch(`https://port-0-node-mssql-postwork-3q0b1b25l928uuj4.gksl1.cloudtype.app/postwork/${conname}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    try {
+                        for (var i=0; i<7; i++) {
+                        document.getElementById(`status`+i).innerText = '[ ' + data[i].Cnt + ' ]'
+                    }
+                    } catch (error) {
+                        document.getElementById(`status`+i).innerText = '[ 0 ]'
+                    }
+                });
+        }
+
+        //작업현황 버튼 클릭시 동작 설정
+        const arraybtn = document.getElementsByClassName('list-group-item-action');    
+        try {
+            for(var i in arraybtn){
+                var status = arraybtn[i].id
+                document.getElementById(arraybtn[i].id).addEventListener('click',function chkbtnid(){
+                    //console.log(event.currentTarget.id)
+                    status = event.currentTarget.id
+                    var postlists = new getPostByStatus()
+                });           
+        };
+        } catch (error) {
+                console.log(error)
+        }
+
+        var imageSize = new kakao.maps.Size(15, 15); 
+        //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+
+        function createMarker(position, title, image) {
+            var marker = new kakao.maps.Marker({
+                position: position,
+                title: title,
+                image: image
+            });
+
+            return marker;
+        }
+        
+        //전주리스트 가져오기
+        function getPostByStatus() {       
+            fetch(`https://port-0-node-mssql-postwork-3q0b1b25l928uuj4.gksl1.cloudtype.app/postwork/${conname}/${status}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    var obj_p = document.getElementById('ul_postlist');
+                    clr_postlist(obj_p); //리스트 초기화
+
+
+                    //리스트 생성 
+                    try {
+                        for(var i in data){
+                            var PostList = new set_postlist(i,data[i])    //리스트 추가
+                            var marker = new createMarker(new kakao.maps.LatLng(data[i].PCoordinate), data[i].Post, new kakao.maps.MarkerImage("images/" + data[i].P_Status + ".png", imageSize));   
+
+                            marker[i].setMap(map);
+                        }                    
+                    } catch (error) {
+                        console.log(error)
+                    }
+
+                    // 지도에 마커를 표시합니다
+                    //marker.setMap(map);
+                });
+        }   
+
+        //전주리스트 초기화
+        function clr_postlist(obj_p){
+            var obj_c = obj_p.children
+            for (var i in obj_c) {
+                obj_c[i].innerHTML=""   //innerHTML을 먼저 지워주지 않으면 remove가 안됨..;
+                obj_c[i].remove;
+            }    
+        }
+        //전주리스트 생성
+        function set_postlist(i,data) {
+            var obj_p = document.getElementById('ul_postlist');        
+            var obj_c = document.createElement('li');
+            obj_p.append(obj_c)
+
+            obj_c.innerHTML = `<a href=""><img class="marker-img me-1" src="./images/` + data.P_Status + `.png"></i><div>` + data.Post + `<div class="nav-content-address">  ` + data.PAddress + `</div></div></a>\n<hr>`
+            console.log(data)
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
