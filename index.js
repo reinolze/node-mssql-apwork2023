@@ -22,10 +22,11 @@ const config = {
     },
 };
 
-// console.log("DB_HOST:", process.env.SQL_DRIVER);
-// console.log("DB_HOST:", process.env.SQL_SERVER);
-// console.log("DB_HOST:", process.env.SQL_DATABASE);
-// console.log("DB_HOST:", process.env.SQL_UID);
+ //console.log("DB_HOST:", process.env.SQL_DRIVER);
+ //console.log("DB_HOST:", process.env.SQL_SERVER);
+ //console.log("DB_HOST:", process.env.SQL_PORT);
+ //console.log("DB_HOST:", process.env.SQL_DATABASE);
+ //console.log("DB_HOST:", process.env.SQL_UID);
 
 const pool = new mssql.ConnectionPool(config);
 
@@ -46,7 +47,8 @@ app.get('/isMobile', (req, res) => {
 
 app.get('/apwork2023', async (req, res) => {
     // 정상적으로 동작하는지 확인하기 위한 테스트...
-    
+    res.send('1234');
+
     try {
         await pool.connect();
         
@@ -71,16 +73,16 @@ app.get('/apwork2023', async (req, res) => {
 });
 
 //작업현황 가져오기
-app.get('/postwork/:conname', async (req, res) => {
+app.get('/apwork2023/:worker', async (req, res) => {
     // SP 수정해야 함;;;;
-    const { conname } = req.params
+    const { worker } = req.params
 
     try {
         await pool.connect();
         
         const result = await pool.request()
-            .input('ConName', mssql.VarChar, conname)
-            .execute(`dbo.Get_PostWorkSummary`);
+            .input('worker', mssql.VarChar, worker)
+            .execute(`dbo.SP_GetStatus`);
         const posts = result.recordset;
 
         
@@ -98,19 +100,19 @@ app.get('/postwork/:conname', async (req, res) => {
     }    
 });
 
-app.get('/postwork/:conname/:status', async (req, res) => {
-    // ./postwork/:conname/:status로 접속하면 해당 공사, status 별로 리스트 업
+app.get('/apwork2023/:worker/:B_Stat', async (req, res) => {
+    // ./apwork2023/:worker/:status로 접속하면 시공업체, B_Stat 별로 리스트 업
     // status = ALL, 전부표시
-    const { conname } = req.params
-    const { status } = req.params
+    const { worker } = req.params
+    const { B_Stat } = req.params
 
     try {
         await pool.connect();
         
         const result = await pool.request()
-            .input('ConName', mssql.VarChar, conname)
-            .input('status', mssql.VarChar, status)
-            .execute(`dbo.Get_PostWorkListByStatus`);
+            .input('worker', mssql.VarChar, worker)
+            .input('B_Stat', mssql.VarChar, B_Stat)
+            .execute(`dbo.SP_GetAPList_4web`);
         const posts = result.recordset;
 
         if (posts) {
