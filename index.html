@@ -37,15 +37,7 @@
     <script type="text/javascript"></script>
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=965b22ebef0dab874758c4d4379f6b33&libraries=services"></script>
 </head>
-<style>
-        table {
-      width: 100%;
-      border: 1px solid #444444;
-      border-collapse: collapse;
-      margin: 0px;
-      font-size: small;
-    }
-</style>
+
 <body>
 
     <!-- ======= Header ======= -->
@@ -70,6 +62,12 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
+                <select id="selectbox" name="selectbox"  style="width:100%" onchange="getConStatus()">
+                    <option value="" selected disabled>시공업체 선택</option>              
+                    <option value="ALL">전체</option>
+                    <option value="에이스" selected>에이스전기통신</option>
+                    <option value="BK">BK</option>
+                </select>
                 <div class="card">
                     <a class="nav-link " data-bs-target="#constatus-nav" data-bs-toggle="collapse" href="#">
                         <i class="bi bi-graph-up-arrow"></i><span>작업현황</span><i class="bi bi-chevron-down ms-auto"></i><br>
@@ -79,27 +77,42 @@
                     
                     <div id="constatus-nav" class="list-group collapse " data-bs-parent="#sidebar-nav">
                         <div class="card-body"> 
-                            <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>에이스전기통신</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
-                                    <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>제주공공[교체]</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
-                                    <button id="nontarget" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/nontarget.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
-                                    <button id="incomplete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/incomplete.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
-                                    <button id="complete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/complete.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
-                                    <button id="added" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/added.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
-                                    <button id="cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
+                            <button id="ALL" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><span id="SelectedWorker"><b>에이스전기통신</b></span><span id="status0" class="card-body-count">[000]</span></a></button>
+                            <button id="jeju_rep" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><span><b>제주공공[교체]</b></span><span id="status1" class="card-body-count">[000]</span></a></button>
+                            <button id="jeju_rep_actual" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_rep_actual.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
+                            <button id="jeju_rep_pull" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_rep_pull.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
+                            <button id="jeju_rep_open" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_rep_open.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
+                            <button id="jeju_rep_delay" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_rep_delay.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
+                            <button id="jeju_rep_cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_rep_cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
 
-                                    <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>제주공공[신규]</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
-                                    <button id="nontarget" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/nontarget.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
-                                    <button id="incomplete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/incomplete.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
-                                    <button id="complete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/complete.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
-                                    <button id="added" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/added.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
-                                    <button id="cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
+                            <button id="jeju_new" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><span><b>제주공공[신규]</b></span><span id="status7" class="card-body-count">[000]</span></a></button>
+                            <button id="jeju_new_actual" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_new_actual.png"></i><a>실사완료<span id="status8" class="card-body-count">[222]</span></a></button>
+                            <button id="jeju_new_pull" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_new_pull.png"></i><a>회선완료<span id="status9" class="card-body-count">[333]</span></a></button>
+                            <button id="jeju_new_open" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_new_open.png"></i><a>개통완료<span id="status10" class="card-body-count">[444]</span></a></button>
+                            <button id="jeju_new_delay" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_new_delay.png"></i><a>작업연기<span id="status11" class="card-body-count">[555]</span></a></button>
+                            <button id="jeju_new_cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/jeju_new_cancle.png"></i><a>작업취소<span id="status12" class="card-body-count">[666]</span></a></button>
 
-                                    <button id="All" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><spna><b>NIA[신규]</b></spna><span id="status0" class="card-body-count">[000]</span></a></button>
-                                    <button id="nontarget" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/nontarget.png"></i><a>실사완료<span id="status2" class="card-body-count">[222]</span></a></button>
-                                    <button id="incomplete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/incomplete.png"></i><a>회선완료<span id="status3" class="card-body-count">[333]</span></a></button>
-                                    <button id="complete" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/complete.png"></i><a>개통완료<span id="status4" class="card-body-count">[444]</span></a></button>
-                                    <button id="added" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/added.png"></i><a>작업연기<span id="status5" class="card-body-count">[555]</span></a></button>
-                                    <button id="cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><img class="marker-img me-1" src="./images/cancle.png"></i><a>작업취소<span id="status6" class="card-body-count">[666]</span></a></button>
+                            <button id="nia_new" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; "><a><span><b>NIA[신규]</b></span><span id="status13" class="card-body-count">[000]</span></a></button>
+                            <button id="nia_new_actual" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/nia_new_actual.png"></i><a>실사완료<span id="status14" class="card-body-count">[222]</span></a></button>
+                            <button id="nia_new_pull" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/nia_new_pull.png"></i><a>회선완료<span id="status15" class="card-body-count">[333]</span></a></button>
+                            <button id="nia_new_open" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/nia_new_open.png"></i><a>개통완료<span id="status16" class="card-body-count">[444]</span></a></button>
+                            <button id="nia_new_delay" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/nia_new_delay.png"></i><a>작업연기<span id="status17" class="card-body-count">[555]</span></a></button>
+                            <button id="nia_new_cancle" type="button" class="list-group-item list-group-item-action" style="padding-top: 2px; padding-bottom: 2px; ">
+                                <img class="marker-img me-1" src="./images/nia_new_cancle.png"></i><a>작업취소<span id="status18" class="card-body-count">[666]</span></a></button>
 
                         </div>
                     </div>
@@ -114,7 +127,7 @@
 
             </li><!-- End Components Nav -->
         </ul>
-        <p align="right"><font size="1" >(UPDATE : 2023-06-21 00:00:00)</font></p>
+        <!--  <p align="right"><font size="1" >(UPDATE : 2023-06-21 00:00:00)</font></p> -->
     </aside><!-- End Sidebar-->
     
     <!-- 지도를 여기에 표시 -->
@@ -141,7 +154,6 @@
     <script src="assets/js/main.js"></script>
 
     <script>
-
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = {
             center: new kakao.maps.LatLng(33.4985971130147, 126.509667470518), // 지도의 중심좌표, 오라로1길 36
@@ -154,23 +166,42 @@
         // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
         var mapTypeControl = new kakao.maps.MapTypeControl();   
 
-        //일단 공사명 받아옴
-        const conname = document.getElementById('titleConName').innerText //value는 태그 내용까지 모두 포함해서 문자열만 받아 올 수 없음
+        // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+        // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+        map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+     
+        var worker ="";  
+        var PostList=[];      
+        var marker =[];
+
+        function SelectedWorker(){
+            var workerSelect = document.getElementById("selectbox");
+            return workerSelect.options[workerSelect.selectedIndex].value;
+        }
+        
+        function SelectedWorkerText(){
+            var workerSelect = document.getElementById("selectbox");
+            return workerSelect.options[workerSelect.selectedIndex].text;
+        }
 
         //공사명 받아왔으면.. 작업현황도 가져와야..
         var ConStatus = new getConStatus();
 
         //작업현황 가져오기
-        function getConStatus() {       
-            fetch(`https://port-0-node-mssql-postwork-3q0b1b25l928uuj4.gksl1.cloudtype.app/postwork/${conname}`)
+        function getConStatus() {   
+            worker =SelectedWorker();        
+            //console.log(worker);
+            document.getElementById('SelectedWorker').innerHTML="<b>" + SelectedWorkerText() + "</b>";
+
+            fetch(`https://port-0-node-mssql-apwork2023-7xwyjq992llj6if4yh.sel4.cloudtype.app/apwork2023/${worker}`)
                 .then((response) => response.json())
                 .then((data) => {
                     try {
-                        for (var i=0; i<7; i++) {
-                        document.getElementById(`status`+i).innerText = '[ ' + data[i].Cnt + ' ]'
+                        for (var i=0; i<19; i++) {
+                        document.getElementById(`status`+i).innerText = '[ ' + data[i].cnt + ' ]'
                     }
                     } catch (error) {
-                        document.getElementById(`status`+i).innerText = '[ 0 ]'
+                        document.getElementById(`status`+i).innerText = '[ 000 ]'
                     }
                 });
         }
@@ -182,7 +213,7 @@
                 var status = arraybtn[i].id
                 document.getElementById(arraybtn[i].id).addEventListener('click',function chkbtnid(){
                     //console.log(event.currentTarget.id)
-                    status = event.currentTarget.id
+                    B_Stat = event.currentTarget.id
                     var postlists = new getPostByStatus()
                 });           
         };
@@ -191,8 +222,7 @@
         }
 
         var imageSize = new kakao.maps.Size(15, 15); 
-        //var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-
+        
         function createMarker(position, title, image) {
             var marker = new kakao.maps.Marker({
                 position: position,
@@ -205,29 +235,35 @@
         
         //전주리스트 가져오기
         function getPostByStatus() {       
-            fetch(`https://port-0-node-mssql-postwork-3q0b1b25l928uuj4.gksl1.cloudtype.app/postwork/${conname}/${status}`)
+            fetch(`https://port-0-node-mssql-apwork2023-7xwyjq992llj6if4yh.sel4.cloudtype.app/apwork2023/${worker}/${B_Stat}`)
                 .then((response) => response.json())
                 .then((data) => {
                     var obj_p = document.getElementById('ul_postlist');
                     clr_postlist(obj_p); //리스트 초기화
+                    clr_marker(marker); //마커 초기화
 
-
-                    //리스트 생성 
                     try {
                         for(var i in data){
-                            var PostList = new set_postlist(i,data[i])    //리스트 추가
-                            var marker = new createMarker(new kakao.maps.LatLng(data[i].PCoordinate), data[i].Post, new kakao.maps.MarkerImage("images/" + data[i].P_Status + ".png", imageSize));   
+                            //var PostList = new set_postlist(i,data[i])    //리스트 추가
+                            PostList[i] = new set_postlist(i,data[i])    //리스트 추가
 
+                            marker[i]= new createMarker(new kakao.maps.LatLng(data[i].P_Lat,data[i].P_Lng), data[i].P_Name, new kakao.maps.MarkerImage("images/" + data[i].B_Stat + ".png", imageSize));   
                             marker[i].setMap(map);
+                            
                         }                    
                     } catch (error) {
                         console.log(error)
                     }
-
-                    // 지도에 마커를 표시합니다
-                    //marker.setMap(map);
                 });
+
         }   
+
+        //마커 초기화
+        function clr_marker(marker){
+            for (var i in marker) {
+                marker[i].setMap(null);
+            }    
+        }
 
         //전주리스트 초기화
         function clr_postlist(obj_p){
@@ -242,9 +278,31 @@
             var obj_p = document.getElementById('ul_postlist');        
             var obj_c = document.createElement('li');
             obj_p.append(obj_c)
+            obj_c.id = i
+            obj_c.P_Name=data.P_Name
+            obj_c.Lat = data.P_Lat
+            obj_c.Lng = data.P_Lng
 
-            obj_c.innerHTML = `<a href=""><img class="marker-img me-1" src="./images/` + data.P_Status + `.png"></i><div>` + data.Post + `<div class="nav-content-address">  ` + data.PAddress + `</div></div></a>\n<hr>`
-            console.log(data)
+            obj_c.addEventListener('click',function postid(){
+                    if (event.currentTarget.Lat.length <1){
+                        alert("좌표(카카오맵) 정보가 입력되지 않았습니다.");
+                    } else {
+                        obj_c.addEventListener('dblclick',function linkto(){
+                            //console.log('https://map.kakao.com/link/to/' + data.P_Name +`,` + obj_c.Lat + `,` + obj_c.Lng)
+                            window.open('https://map.kakao.com/link/to/' + data.P_Name +`,` + obj_c.Lat + `,` + obj_c.Lng);
+                        });
+                        var moveLatLng = new kakao.maps.LatLng(obj_c.Lat, obj_c.Lng);
+
+                        map.setCenter(moveLatLng);
+                        map.setLevel(1);
+                    }
+
+
+                });
+
+            obj_c.innerHTML = `<a href="#"><img class="marker-img me-1" src="./images/` + data.B_Stat + `.png"><div>`+ data.P_Name + `<div class="nav-content-address">  ` + data.P_Address + `</div></div></a>\n<hr>`
+            //console.log(i,data)
+            
         }
 
 
