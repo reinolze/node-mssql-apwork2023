@@ -100,6 +100,39 @@ app.get('/apwork2023/:worker', async (req, res) => {
     }    
 });
 
+//AP공사현황 가져오기
+app.get('/apwork2023/ConStatus/:ConDiv/:B_Stat/:W_Regist', async (req, res) => {
+    // SP 수정해야 함;;;;
+    const { ConDiv } = req.params
+    const { B_Stat } = req.params
+    const { W_Regist } = req.params
+
+    try {
+        await pool.connect();
+        
+        
+        const result = await pool.request()
+        .input('ConDiv', mssql.VarChar, ConDiv)
+        .input('B_Stat', mssql.VarChar, B_Stat)
+        .input('W_Regist', mssql.VarChar, W_Regist)
+        .execute(`dbo.SP_GetAPList_4web_New`);
+        const posts = result.recordset;
+
+        
+        if (posts) {
+            return res.json(posts);
+        } else {
+            return res.status(404).json({
+                message: 'Record not found'
+            });
+        }      
+             
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json(error);        
+    }    
+});
+
 app.get('/apwork2023/:worker/:B_Stat', async (req, res) => {
     // ./apwork2023/:worker/:status로 접속하면 시공업체, B_Stat 별로 리스트 업
     // status = ALL, 전부표시
